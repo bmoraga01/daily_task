@@ -1,0 +1,72 @@
+{% load static %}
+
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Topbar Search -->
+    {% comment %} <form
+        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form> {% endcomment %}
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+        {% if user.is_anonymous %}
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a href="{% url "account_signup" %}" class="btn btn-secondary" style='margin-top: 10px;'>Register</a>
+        </li>
+
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a href="{% url "account_login" %}" class="btn btn-outline-primary" style='margin-top: 10px;'>Login</a>
+        </li>
+        {% else %}
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{% if user.first_name %}{{ user.first_name }} {{ user.last_name }}{% else %}{{ user.username }}{% endif %}</span>
+                {% comment %} <img class="img-profile rounded-circle" src="{% static "img/undraw_profile.svg" %}"> {% endcomment %}
+                <img src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" class="img-profile rounded-circle">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url "core:profile_detail" %}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="{% url "core:edit_profile" %}">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                {% if user.is_superuser or user.is_staff %}
+                <a class="dropdown-item" href="{% url "admin:index" %}">
+                    <i class="fas fa-user-shield fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Admin
+                </a>
+                {% endif %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+        {% endif %}
+
+    </ul>
+
+</nav>

@@ -1,0 +1,77 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Register{% endblock head_title %}
+
+{% block page_content %}
+
+<div class="container">
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+            </div>
+            <form action="{% url "account_signup" %}" method="post" class="user">
+              {% csrf_token %}
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <div class="form-group">
+                <input type="text" name="username" id="id_username" class="form-control form-control-user"
+                  placeholder="Username">
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" id="id_email" class="form-control form-control-user"
+                  placeholder="Email Address">
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 md-sm-0">
+                  <input type="password" name="password1" id="id_password1" class="form-control form-control-user"
+                    placeholder="Password">
+                </div>
+                <div class="col-sm-6">
+                  <input type="password" name="password2" id="id_password2" class="form-control form-control-user"
+                    placeholder="Repeat Password">
+                </div>
+              </div>
+              <button class="btn btn-primary btn-user btn-block">Register Account</button>
+              <hr>
+              <a href="#" class="btn btn-google btn-user btn-block">
+                <i class="fab fa-google fa-fw"></i> Register with Google
+              </a>
+              <a href="#" class="btn btn-facebook btn-user btn-block">
+                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+              </a>
+            </form>
+            <hr>
+            <div class="text-center">
+              <a class="small" href="{% url "account_login" %}">Already have an account? Login!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock page_content %}
+
+{% comment %} {% block content %}
+<h1>{% trans "Sign Up" %}</h1>
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+
+{% endblock content %} {% endcomment %}

@@ -1,0 +1,78 @@
+{% extends "base/index.html" %}
+
+{% block page_title %}Edit Profile{% endblock page_title %}
+
+{% block page_content %}
+
+<div class="container">
+    <div class="row justify-content">
+        <div class="col-xl-9">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Profile</h6>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" class="user" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xl-12 mb-2">
+                                <div class="form-group">
+                                    <label for="" class="form-label">Profile Image</label>
+                                    {{ form.profile_image }}
+                                </div>
+                            </div>
+                            <div class="col-xl-6 mb-2">
+                                <label for="" class="form-label">First Name</label>
+                                <input type="text" name="first_name" id="id_first_name" class="form-control" value="{{ object.user.first_name }}">
+                            </div>
+                            <div class="col-xl-6 mb-2">
+                                <label for="" class="form-label">Last Name</label>
+                                <input type="text" name="last_name" id="id_last_name" class="form-control" value="{{ object.user.last_name }}">
+                            </div>
+                            <div class="col-xl-6 mb-2">
+                                <label for="" class="form-label">Gender</label>
+                                {{ form.gender }}
+                            </div>
+                            <div class="col-xl-6 mb-2" id="other_gender" style="display: none;">
+                                <label for="" class="form-label">Other Gender</label>
+                                {{ form.other_gender }}
+                            </div>
+                            <div class="col-xl-6 mb-2">
+                                <label for="" class="form-label">Birth Date</label>
+                                <input type="date" name="birth_date" id="id_birth_date" class="form-control" value="{{ object.birth_date|date:'Y-m-d' }}">
+                            </div>
+                            <div class="col-xl-6 mb-2">
+                                <label for="" class="form-label">Phone Number</label>
+                                {{ form.phone_number }}
+                            </div>
+                            <div class="col-xl-6 mb-2">
+                                <label for="" class="form-label">Location</label>
+                                {{ form.location }}
+                            </div>
+                        </div>
+                        <hr>
+                        <button class="btn btn-primary btn-block">Save Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    const gender = document.querySelector('#id_gender');
+
+    gender.addEventListener('change', e => {
+
+        if (e.target.value === '3') {
+            $('#other_gender').show();
+        } else {
+            $('#other_gender').hide();
+        }
+    });
+
+</script>
+
+{% endblock page_content %}

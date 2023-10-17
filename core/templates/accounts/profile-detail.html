@@ -1,0 +1,78 @@
+{% extends "base/index.html" %}
+
+{% load static %}
+
+{% block page_title %}Profile{% endblock page_title %}
+
+{% block page_content %}
+
+<a href="{% url "core:edit_profile" %}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</a>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Profile Image</h6>
+                </div>
+                <div class="card-body">
+                    <img src="{{ object.profile_image.url }}" alt="" class='mx-auto' style="width: 250px; height: 250px; clip-path: circle(50%); display: block; margin-left: auto; margin-right: auto;">
+                    {% comment %} <img src="{% static "img/undraw_profile.svg" %}" alt=""> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Profile Info</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-12 mb-2">
+                            <div class="form-group">
+                                <label for="" class="form-label">Username</label>
+                                <input type="text" class="form-control" readonly value="{{ user.username }}">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 mb-2">
+                            <div class="form-group">
+                                <label for="" class="form-label">First Name</label>
+                                <input type="text" class="form-control" readonly value="{{ user.first_name }}">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 mb-2">
+                            <div class="form-group">
+                                <label for="" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" readonly value="{{ user.last_name }}">
+                            </div>
+                        </div>
+                        <div class="col-xl-12 mb-2">
+                            <div class="form-group">
+                                <label for="" class="form-label">Email Address</label>
+                                <input type="text" class="form-control" readonly value="{{ user.email }}">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 mb-2">
+                            <label for="" class="form-label">Gender</label>
+                            <input type="text" class="form-control" readonly value="{% if object.gender == '3' %}{% else %}{{ object.get_gender_display|default_if_none:"" }}{% endif %}">
+                        </div>
+                        <div class="col-xl-6 mb-2">
+                            <label for="" class="form-label">Birth Date</label>
+                            <input type="text" class="form-control" readonly value="{{ object.birth_date|date:'SHORT_DATE_FORMAT' }}">
+                        </div>
+                        <div class="col-xl-6 mb-2">
+                            <label for="" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" readonly value="{{ object.phone_number|default_if_none:"" }}">
+                        </div>
+                        <div class="col-xl-6 mb-2">
+                            <label for="" class="form-label">Location</label>
+                            <input type="text" class="form-control" readonly value="{{ object.location|default_if_none:"" }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock page_content %}
