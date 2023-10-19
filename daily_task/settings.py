@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     
     # Apps
     'core.apps.CoreConfig',
+    'tasks.apps.TasksConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +145,8 @@ LOGOUT_REDIRECT_URL = "core:index_page"
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_LOGOUT_ON_GET = True
 
 ##### EMAIL CONFIG ######
 

@@ -6,3 +6,7 @@ core/__pycache__/
 core/migrations/
 
 daily_task/__pycache__/
+
+tasks/__pycache__/
+tasks/migrations/
+tasks/templatetags/__pycache__/
